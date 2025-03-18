@@ -67,6 +67,40 @@ services:
     depends_on:
       - mysql
 
+  # Add PostgreSQL service for Odoo
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+      - TZ: Asia/Tbilisi
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro  # Mount the host timezone file
+      - /etc/timezone:/etc/timezone:ro  # Mount the host timezone file
+    ports:
+      - "5432:5432"
+
+  # Add Odoo service
+  odoo:
+    image: odoo_tsogi:1.0
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./odoo-custom-addons:/mnt/extra-addons
+    command: -- --database=khinkali_tsogi
+
   mysql:
     image: mysql:latest
     restart: unless-stopped
@@ -79,6 +113,7 @@ services:
       - /etc/localtime:/etc/localtime:ro  # Mount the host timezone file
       - /etc/timezone:/etc/timezone:ro  # Mount the host timezone file
 
-
 volumes:
   mysql-data:
+  postgres-data:
+  odoo-web-data:

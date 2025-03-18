@@ -1,23 +1,24 @@
-# Use an official Node runtime as a parent image
-FROM node:latest
+# Use the official Odoo image as base
+FROM odoo:16.0
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Set the working directory
+WORKDIR /usr/lib/python3/dist-packages/odoo
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Install additional dependencies if needed
+USER root
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    postgresql-client \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
-RUN npm install
+# Install additional Python packages if required
+# RUN pip3 install some-package
 
-# Bundle app source inside the Docker image
-COPY . .
+# Copy custom modules if you have any
+# COPY ./custom_addons /mnt/extra-addons/
 
-# Build the Next.js application
-# RUN npm run build
+# Expose the Odoo port
+EXPOSE 8069 8072
 
-# Your app will bind to port 3000, so use the EXPOSE instruction to have it mapped by the docker daemon
-EXPOSE 3008
-
-# Define the command to run the app
-CMD ["npm", "start"]
+# The command will be inherited from the base image
+# CMD ["odoo"]
