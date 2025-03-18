@@ -21,5 +21,8 @@ export class ActionpadWidget extends Component {
     setup() {
         this.pos = usePos();
         this.ui = useState(useService("ui"));
+        this.hey = () => {
+            console.log("hey Nika");
+        };
     }
 }

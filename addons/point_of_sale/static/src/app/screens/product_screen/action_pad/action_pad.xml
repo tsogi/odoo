@@ -10,6 +10,9 @@
                     <span>Actions</span>
                 </button>
             </div>
+            <button class="button mobile-more-button btn btn-light btn-lg flex-fill" t-on-click="hey">
+                <span>Test Btn</span>
+            </button>
             <div t-if="props.showActionButton" class="validation d-flex gap-2">
                 <BackButton t-if="pos.showBackButton()" onClick="() => pos.onClickBackButton()"/>
                 <button class="pay pay-order-button button btn btn-primary btn-lg py-3 d-flex align-items-center justify-content-center flex-fill"
