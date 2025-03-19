@@ -97,6 +97,14 @@ services:
       - USER=odoo
       - PASSWORD=odoo
       - DATABASE=khinkali_tsogi
+    user: root  # Temporarily use root
+    command: >
+      bash -c "
+        mkdir -p /var/lib/odoo/sessions &&
+        chown -R odoo:odoo /var/lib/odoo &&
+        chmod -R 700 /var/lib/odoo &&
+        su odoo -c 'python3 /usr/lib/python3/dist-packages/odoo/odoo-bin -c /etc/odoo/odoo.conf'
+      "
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./odoo-custom-addons:/mnt/extra-addons
