@@ -1,5 +1,5 @@
-# Start with a Python base image
-FROM python:3.10-bullseye
+# Start with a Python 3.11 base image
+FROM python:3.11-bullseye
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
