@@ -96,10 +96,10 @@ services:
       - HOST=postgres
       - USER=odoo
       - PASSWORD=odoo
+      - DATABASE=khinkali_tsogi
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./odoo-custom-addons:/mnt/extra-addons
-    command: -- --database=khinkali_tsogi
 
   mysql:
     image: mysql:latest
