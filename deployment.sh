@@ -18,9 +18,9 @@ ssh -i /users/nika/.ssh/id_rsa_ubuntu_server nika@tsogi.net << EOF
     cd /var/projects
     
     # Executing the commands
-    docker-compose stop odoo_tsogi
-    docker-compose rm -f odoo_tsogi
+    docker-compose stop odoo
+    docker-compose rm -f odoo
     docker load -i odoo_tsogi.tar
-    docker-compose up -d odoo_tsogi
+    docker-compose up -d odoo
     docker system prune -f
 EOF

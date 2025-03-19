@@ -1,5 +1,5 @@
-# Use the official Odoo image as base
-FROM odoo:16.0
+# Update to use Odoo 18.0 as the base image
+FROM odoo:18.0
 
 # Set the working directory
 WORKDIR /usr/lib/python3/dist-packages/odoo
